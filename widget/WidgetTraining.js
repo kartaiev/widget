@@ -33,13 +33,10 @@ define([
       this.loaderNode.src = this.loader;
     },
 
-    endLoading: function (loading) {
-      !loading &&
-        fx
-          .fadeOut({
-            node: this.domNode,
-          })
-          .play();
+    endLoading: function () {
+      fx.fadeOut({
+        node: this.domNode,
+      }).play();
     },
   });
 });

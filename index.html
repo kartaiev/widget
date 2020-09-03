@@ -9,7 +9,7 @@
 
   <body>
     <div id="container"></div>
-    <div class="under-overlay">
+    <div id="under" class="under-overlay">
       <h1>Hello! The page is loaded!!!</h1>
     </div>
 
@@ -30,13 +30,18 @@
     <script>
       require([
         "dojo/dom",
+        "dojo/dom-style",
         "dojo/parser",
         "widget/WidgetTraining",
         "dojo/domReady!",
-      ], (dom, parser, WidgetTraining) => {
+      ], (dom, domStyle, parser, WidgetTraining) => {
         const container = dom.byId("container");
+        const under = dom.byId("under");
         const widget = new WidgetTraining().placeAt(container);
-        console.log(widget.endLoading);
+        setTimeout(() => {
+          domStyle.set(under, "display", "flex");
+          widget.endLoading();
+        }, 3000);
         parser.parse();
       });
     </script>
