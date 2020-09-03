@@ -9,7 +9,6 @@
 
   <body>
     <div id="container"></div>
-    <div data-dojo-type="widget/WidgetTraining"></div>
     <div class="under-overlay">
       <h1>Hello! The page is loaded!!!</h1>
     </div>
@@ -18,11 +17,11 @@
       var dojoConfig = {
         async: true,
         dojoBlankHtmlUrl:
-          location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
+          location.pathname.replace(/\/[^/]+$/, "") + "/blank.html",
         packages: [
           {
-            name: 'widget',
-            location: location.pathname.replace(/\/[^/]+$/, '') + '/widget',
+            name: "widget",
+            location: location.pathname.replace(/\/[^/]+$/, "") + "/widget",
           },
         ],
       };
@@ -30,13 +29,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
       require([
-        'dojo/dom',
-        'dojo/parser',
-        'widget/WidgetTraining',
-        'dojo/domReady!',
-      ], (dom, parser) => {
-        const container = dom.byId('container');
-        // const widget = new WidgetTraining().placeAt(container);
+        "dojo/dom",
+        "dojo/parser",
+        "widget/WidgetTraining",
+        "dojo/domReady!",
+      ], (dom, parser, WidgetTraining) => {
+        const container = dom.byId("container");
+        const widget = new WidgetTraining().placeAt(container);
+        console.log(widget.endLoading);
         parser.parse();
       });
     </script>
