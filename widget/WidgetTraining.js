@@ -1,36 +1,41 @@
 define([
   'dojo/_base/declare',
+  'dojo/_base/fx',
+  'dojo/dom-style',
   'dijit/_WidgetBase',
   'dijit/_OnDijitClickMixin',
   'dijit/_TemplatedMixin',
   'dojo/text!./templates/template.html',
-], function (
+], (
   declare,
+  fx,
+  domSlyle,
   _WidgetBase,
   _OnDijitClickMixin,
   _TemplatedMixin,
   template
-) {
+) => {
   return declare([_WidgetBase, _OnDijitClickMixin, _TemplatedMixin], {
     templateString: template,
 
-    baseClass: 'widgetClass',
-    title: '',
-    _counter: 1,
-    _firstClicked: false,
+    baseClass: 'page-overlay',
 
-    _onClick: function () {
-      if (this._firstClicked) {
-        this.titleNode.innerHTML = `${this.title} was clicked ${++this
-          ._counter} times.`;
-      } else {
-        this.titleNode.innerHTML = `${this.title}' was clicked!`;
-        this._firstClicked = true;
-      }
-    },
+    title: 'Loading...',
+
+    loader: require.toUrl('../loading.gif'),
 
     postCreate: function () {
       this.titleNode.innerHTML = this.title;
+      this.loaderNode.src = this.loader;
+    },
+
+    endLoading: (loading) => {
+      fx.fadeOut({
+        node: this.domNode,
+        onEnd: function (node) {
+          !loading && domSlyle.set(this.domNode, 'display', 'none');
+        },
+      }).play();
     },
   });
 });

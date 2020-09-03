@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Widget Training</title>
-</head>
+  </head>
 
-<body>
-    <div data-dojo-type="widget/WidgetTraining" data-dojo-props="title:'Our Some Widget'">
-        <p>This is arbitrary content!</p>
-        <button data-dojo-type="dijit/form/Button">My Button</button>
-        <p>More arbitrary content!</p>
+  <body>
+    <div data-dojo-type="widget/WidgetTraining"></div>
+    <div class="under-overlay">
+      <h1>Hello! The page is loaded!!!</h1>
     </div>
-    <script>
-        var dojoConfig = {
-            async: true,
-            dojoBlankHtmlUrl: location.pathname.replace(/\/[^/]+$/, "") + "/blank.html",
-            packages: [{
-                name: "widget",
-                location: location.pathname.replace(/\/[^/]+$/, "") + "/widget"
-            }]
-        };
-    </script>
-    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js">
 
-    </script>
     <script>
-        require(["dojo/parser", "widget/WidgetTraining", "dijit/form/Button", ], (parser) => {
-            parser.parse()
-        })
+      var dojoConfig = {
+        async: true,
+        dojoBlankHtmlUrl:
+          location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
+        packages: [
+          {
+            name: 'widget',
+            location: location.pathname.replace(/\/[^/]+$/, '') + '/widget',
+          },
+        ],
+      };
     </script>
-</body>
-
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
+    <script>
+      require(['dojo/parser', 'widget/WidgetTraining', 'dojo/domReady!'], (
+        parser
+      ) => {
+        parser.parse();
+      });
+    </script>
+  </body>
 </html>
