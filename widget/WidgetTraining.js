@@ -1,6 +1,8 @@
 define([
   'dojo/_base/declare',
   'dojo/_base/fx',
+  'dojo/_base/lang',
+  'dojo/on',
   'dojo/dom-style',
   'dijit/_WidgetBase',
   'dijit/_OnDijitClickMixin',
@@ -9,6 +11,8 @@ define([
 ], (
   declare,
   fx,
+  lang,
+  on,
   domSlyle,
   _WidgetBase,
   _OnDijitClickMixin,
@@ -27,14 +31,13 @@ define([
     postCreate: function () {
       this.titleNode.innerHTML = this.title;
       this.loaderNode.src = this.loader;
+
+      this.own(on(this.domNode, 'onclick', lang.hitch(this, 'endLoading')));
     },
 
-    endLoading: (loading) => {
+    endLoading: function () {
       fx.fadeOut({
         node: this.domNode,
-        onEnd: function (node) {
-          !loading && domSlyle.set(this.domNode, 'display', 'none');
-        },
       }).play();
     },
   });
