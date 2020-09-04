@@ -73,7 +73,6 @@
       ) => {
         const url = 'https://api.punkapi.com/v2/beers';
         const container = dom.byId('container');
-        const under = dom.byId('under');
 
         showDialog = function () {
           registry.byId('beerDialog').show();
@@ -93,7 +92,7 @@
               store: beerStore,
               style: 'width: 200px;',
               labelAttr: 'name',
-              maxHeight: -1, // tells _HasDropDown to fit menu within viewport
+              maxHeight: -1,
               onChange: function (value) {
                 document.getElementById('value').innerHTML = value;
               },
