@@ -15,7 +15,7 @@
     <div id="container"></div>
 
     <div id="under" class="under-overlay">
-      <button onclick="showDialog()" class="under-btn">See the beer!</button>
+      <button id="btn" class="under-btn">See the beer!</button>
     </div>
 
     <div class="dijitHidden">
@@ -51,6 +51,7 @@
     <script>
       require([
         'dojo/dom',
+        'dojo/on',
         'dojo/dom-style',
         'dojo/parser',
         'dijit/Dialog',
@@ -62,6 +63,7 @@
         'dojo/domReady!',
       ], (
         dom,
+        on,
         domStyle,
         parser,
         dialog,
@@ -73,36 +75,41 @@
       ) => {
         const url = 'https://api.punkapi.com/v2/beers';
         const container = dom.byId('container');
+        const btn = dom.byId('btn');
 
         showDialog = function () {
           registry.byId('beerDialog').show();
         };
 
-        const widget = new WidgetTraining().placeAt(container);
+        const getBeersAndPopup = () => {
+          const widget = new WidgetTraining().placeAt(container);
+          fetchData.getBeers(url).then((data) => {
+            const beerStore = new Memory({
+              idProperty: 'tagline',
+              data,
+            });
 
-        fetchData.getBeers(url).then((data) => {
-          const beerStore = new Memory({
-            idProperty: 'tagline',
-            data,
-          });
-
-          const select = new Select(
-            {
-              name: 'beerSelect',
-              store: beerStore,
-              style: 'width: 200px;',
-              labelAttr: 'name',
-              maxHeight: -1,
-              onChange: function (value) {
-                document.getElementById('value').innerHTML = value;
+            const select = new Select(
+              {
+                name: 'beerSelect',
+                store: beerStore,
+                style: 'width: 200px;',
+                labelAttr: 'name',
+                maxHeight: -1,
+                onChange: function (value) {
+                  document.getElementById('value').innerHTML = value;
+                },
               },
-            },
-            'beerSelect'
-          );
-          select.startup();
+              'beerSelect'
+            );
+            select.startup();
 
-          widget.endLoading();
-        });
+            widget.endLoading();
+            showDialog();
+          });
+        };
+
+        on(btn, 'click', getBeersAndPopup);
 
         parser.parse();
       });
