@@ -82,7 +82,6 @@
         const widget = new WidgetTraining().placeAt(container);
 
         fetchData.getBeers(url).then((data) => {
-          // const beers = data.map((beer) => beer.tagline);
           const beerStore = new Memory({
             idProperty: 'tagline',
             data,
