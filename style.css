@@ -43,13 +43,13 @@ body {
   cursor: pointer;
 }
 
-.dijitDialogTitleBar {
+/* .dijitDialogTitleBar {
   background: rgb(76, 99, 126);
   padding: 10px;
-}
+} */
 
-.dijitDialogPaneContent {
+/* .dijitDialogPaneContent {
   background: rgb(230, 230, 231);
   border: 1px solid teal;
   height: 30vh;
-}
+} */

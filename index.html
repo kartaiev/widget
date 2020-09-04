@@ -4,19 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css"
+    />
     <title>Widget Training</title>
   </head>
 
-  <body>
+  <body class="claro">
+    <div id="container"></div>
+
+    <div id="under" class="under-overlay">
+      <button onclick="showDialog()" class="under-btn">See the beer!</button>
+    </div>
+
     <div class="dijitHidden">
       <div
         data-dojo-type="dijit/Dialog"
-        style="width: 600px; height: 30vh"
+        style="width: 600px; background: white"
         id="beerDialog"
-        data-dojo-props="title:'Terms and Conditions'"
+        data-dojo-props="title:'See the Beer!'"
       >
-        sdo;fijas;lfjas;dlfksdj;flkashdj;folkshd;flkahsd;flakshdf
         <div id="beerSelect"></div>
+        <p id="value"></p>
       </div>
     </div>
 
@@ -24,15 +34,15 @@
       var dojoConfig = {
         async: true,
         dojoBlankHtmlUrl:
-          location.pathname.replace(/\/[^/]+$/, "") + "/blank.html",
+          location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
         packages: [
           {
-            name: "widget",
-            location: location.pathname.replace(/\/[^/]+$/, "") + "/widget",
+            name: 'widget',
+            location: location.pathname.replace(/\/[^/]+$/, '') + '/widget',
           },
           {
-            name: "modules",
-            location: location.pathname.replace(/\/[^/]+$/, "") + "/modules",
+            name: 'modules',
+            location: location.pathname.replace(/\/[^/]+$/, '') + '/modules',
           },
         ],
       };
@@ -40,16 +50,16 @@
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
       require([
-        "dojo/dom",
-        "dojo/dom-style",
-        "dojo/parser",
-        "dijit/Dialog",
-        "dijit/registry",
-        "dijit/form/Select",
-        "dojo/store/Memory",
-        "widget/WidgetTraining",
-        "modules/fetchData.js",
-        "dojo/domReady!",
+        'dojo/dom',
+        'dojo/dom-style',
+        'dojo/parser',
+        'dijit/Dialog',
+        'dijit/registry',
+        'dijit/form/Select',
+        'dojo/store/Memory',
+        'widget/WidgetTraining',
+        'modules/fetchData.js',
+        'dojo/domReady!',
       ], (
         dom,
         domStyle,
@@ -61,19 +71,20 @@
         WidgetTraining,
         fetchData
       ) => {
-        const url = "https://api.punkapi.com/v2/beers";
-        const container = dom.byId("container");
-        const under = dom.byId("under");
+        const url = 'https://api.punkapi.com/v2/beers';
+        const container = dom.byId('container');
+        const under = dom.byId('under');
 
         showDialog = function () {
-          registry.byId("beerDialog").show();
+          registry.byId('beerDialog').show();
         };
 
         const widget = new WidgetTraining().placeAt(container);
 
         fetchData.getBeers(url).then((data) => {
+          // const beers = data.map((beer) => beer.tagline);
           const beerStore = new Memory({
-            idProperty: "abbreviation",
+            idProperty: 'tagline',
             data,
           });
 
@@ -81,33 +92,24 @@
 
           const select = new Select(
             {
-              name: "beerSelect",
+              name: 'beerSelect',
               store: beerStore,
-              style: "width: 200px;",
-              labelAttr: "name",
+              style: 'width: 200px;',
+              labelAttr: 'name',
               maxHeight: -1, // tells _HasDropDown to fit menu within viewport
               onChange: function (value) {
-                document.getElementById("value").innerHTML = value;
-                document.getElementById("displayedValue").innerHTML = this.get(
-                  "displayedValue"
-                );
+                document.getElementById('value').innerHTML = value;
               },
             },
-            "beerSelect"
+            'beerSelect'
           );
           select.startup();
 
           widget.endLoading();
-          // domStyle.set(container, "display", "none");
         });
 
         parser.parse();
       });
     </script>
-
-    <div id="container"></div>
-    <div id="under" class="under-overlay">
-      <button onclick="showDialog()" class="under-btn">See the beer!</button>
-    </div>
   </body>
 </html>
