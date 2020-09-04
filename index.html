@@ -8,9 +8,16 @@
   </head>
 
   <body>
-    <div id="container"></div>
-    <div id="under" class="under-overlay">
-      <h1>Hello! The page is loaded!!!</h1>
+    <div class="dijitHidden">
+      <div
+        data-dojo-type="dijit/Dialog"
+        style="width: 600px; height: 30vh"
+        id="beerDialog"
+        data-dojo-props="title:'Terms and Conditions'"
+      >
+        sdo;fijas;lfjas;dlfksdj;flkashdj;folkshd;flkahsd;flakshdf
+        <div id="beerSelect"></div>
+      </div>
     </div>
 
     <script>
@@ -23,6 +30,10 @@
             name: "widget",
             location: location.pathname.replace(/\/[^/]+$/, "") + "/widget",
           },
+          {
+            name: "modules",
+            location: location.pathname.replace(/\/[^/]+$/, "") + "/modules",
+          },
         ],
       };
     </script>
@@ -32,18 +43,71 @@
         "dojo/dom",
         "dojo/dom-style",
         "dojo/parser",
+        "dijit/Dialog",
+        "dijit/registry",
+        "dijit/form/Select",
+        "dojo/store/Memory",
         "widget/WidgetTraining",
+        "modules/fetchData.js",
         "dojo/domReady!",
-      ], (dom, domStyle, parser, WidgetTraining) => {
+      ], (
+        dom,
+        domStyle,
+        parser,
+        dialog,
+        registry,
+        Select,
+        Memory,
+        WidgetTraining,
+        fetchData
+      ) => {
+        const url = "https://api.punkapi.com/v2/beers";
         const container = dom.byId("container");
         const under = dom.byId("under");
+
+        showDialog = function () {
+          registry.byId("beerDialog").show();
+        };
+
         const widget = new WidgetTraining().placeAt(container);
-        setTimeout(() => {
-          domStyle.set(under, "display", "flex");
+
+        fetchData.getBeers(url).then((data) => {
+          const beerStore = new Memory({
+            idProperty: "abbreviation",
+            data,
+          });
+
+          console.log(beerStore);
+
+          const select = new Select(
+            {
+              name: "beerSelect",
+              store: beerStore,
+              style: "width: 200px;",
+              labelAttr: "name",
+              maxHeight: -1, // tells _HasDropDown to fit menu within viewport
+              onChange: function (value) {
+                document.getElementById("value").innerHTML = value;
+                document.getElementById("displayedValue").innerHTML = this.get(
+                  "displayedValue"
+                );
+              },
+            },
+            "beerSelect"
+          );
+          select.startup();
+
           widget.endLoading();
-        }, 3000);
+          // domStyle.set(container, "display", "none");
+        });
+
         parser.parse();
       });
     </script>
+
+    <div id="container"></div>
+    <div id="under" class="under-overlay">
+      <button onclick="showDialog()" class="under-btn">See the beer!</button>
+    </div>
   </body>
 </html>

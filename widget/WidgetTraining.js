@@ -36,6 +36,9 @@ define([
     endLoading: function () {
       fx.fadeOut({
         node: this.domNode,
+        onEnd: function (node) {
+          domSlyle.set(node, "display", "none");
+        },
       }).play();
     },
   });

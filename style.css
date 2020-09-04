@@ -31,7 +31,25 @@ body {
 
 .under-overlay {
   height: 100vh;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.under-btn {
+  border: 1px solid teal;
+  padding: 20px 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.dijitDialogTitleBar {
+  background: rgb(76, 99, 126);
+  padding: 10px;
+}
+
+.dijitDialogPaneContent {
+  background: rgb(230, 230, 231);
+  border: 1px solid teal;
+  height: 30vh;
 }
