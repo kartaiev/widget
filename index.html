@@ -83,6 +83,7 @@
 
         const getBeersAndPopup = () => {
           const widget = new WidgetTraining().placeAt(container);
+
           fetchData.getBeers(url).then((data) => {
             const beerStore = new Memory({
               idProperty: 'tagline',
@@ -102,6 +103,7 @@
               },
               'beerSelect'
             );
+
             select.startup();
 
             widget.endLoading();
