@@ -89,6 +89,7 @@
               idProperty: 'tagline',
               data,
             });
+            console.log(data);
 
             const select = new Select(
               {
@@ -106,9 +107,9 @@
 
             select.startup();
 
-            widget.endLoading();
             showDialog();
           });
+          widget.endLoading();
         };
 
         on(btn, 'click', getBeersAndPopup);
