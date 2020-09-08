@@ -34,15 +34,15 @@
       var dojoConfig = {
         async: true,
         dojoBlankHtmlUrl:
-          location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
+          location.pathname.replace(/\/[^/]+$/, "") + "/blank.html",
         packages: [
           {
-            name: 'widget',
-            location: location.pathname.replace(/\/[^/]+$/, '') + '/widget',
+            name: "widget",
+            location: location.pathname.replace(/\/[^/]+$/, "") + "/widget",
           },
           {
-            name: 'modules',
-            location: location.pathname.replace(/\/[^/]+$/, '') + '/modules',
+            name: "modules",
+            location: location.pathname.replace(/\/[^/]+$/, "") + "/modules",
           },
         ],
       };
@@ -50,17 +50,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
       require([
-        'dojo/dom',
-        'dojo/on',
-        'dojo/dom-style',
-        'dojo/parser',
-        'dijit/Dialog',
-        'dijit/registry',
-        'dijit/form/Select',
-        'dojo/store/Memory',
-        'widget/WidgetTraining',
-        'modules/fetchData.js',
-        'dojo/domReady!',
+        "dojo/dom",
+        "dojo/on",
+        "dojo/dom-style",
+        "dojo/parser",
+        "dijit/Dialog",
+        "dijit/registry",
+        "dijit/form/Select",
+        "dojo/store/Memory",
+        "widget/Overlay",
+        "modules/fetchData.js",
+        "dojo/domReady!",
       ], (
         dom,
         on,
@@ -70,49 +70,49 @@
         registry,
         Select,
         Memory,
-        WidgetTraining,
+        Overlay,
         fetchData
       ) => {
-        const url = 'https://api.punkapi.com/v2/beers';
-        const container = dom.byId('container');
-        const btn = dom.byId('btn');
+        const url = "https://api.punkapi.com/v2/beers";
+        const container = dom.byId("container");
+        const btn = dom.byId("btn");
 
         showDialog = function () {
-          registry.byId('beerDialog').show();
+          registry.byId("beerDialog").show();
         };
 
         const getBeersAndPopup = () => {
-          const widget = new WidgetTraining().placeAt(container);
+          const overlay = new Overlay().placeAt(container);
 
           fetchData.getBeers(url).then((data) => {
             const beerStore = new Memory({
-              idProperty: 'tagline',
+              idProperty: "tagline",
               data,
             });
             console.log(data);
 
             const select = new Select(
               {
-                name: 'beerSelect',
+                name: "beerSelect",
                 store: beerStore,
-                style: 'width: 200px;',
-                labelAttr: 'name',
+                style: "width: 200px;",
+                labelAttr: "name",
                 maxHeight: -1,
                 onChange: function (value) {
-                  document.getElementById('value').innerHTML = value;
+                  document.getElementById("value").innerHTML = value;
                 },
               },
-              'beerSelect'
+              "beerSelect"
             );
 
             select.startup();
           });
 
-          widget.endLoading();
+          overlay.endLoading();
           showDialog();
         };
 
-        on(btn, 'click', getBeersAndPopup);
+        on(btn, "click", getBeersAndPopup);
 
         parser.parse();
       });

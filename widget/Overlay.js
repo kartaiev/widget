@@ -7,7 +7,7 @@ define([
   "dijit/_WidgetBase",
   "dijit/_OnDijitClickMixin",
   "dijit/_TemplatedMixin",
-  "dojo/text!./templates/template.html",
+  "dojo/text!./templates/overlayTemplate.html",
 ], (
   declare,
   fx,
