@@ -10,7 +10,6 @@ define(["modules/fetchData", "dojo/store/Memory", "dijit/form/Select"], (
           idProperty: "tagline",
           data,
         });
-        console.log(data);
 
         const select = new Select(
           {
