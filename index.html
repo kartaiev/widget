@@ -37,16 +37,12 @@
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
-      require([
-        "dojo/dom",
-        "dojo/parser",
-        "dijit/registry",
-        "widget/Dialog",
-        "dojo/domReady!",
-      ], (dom, parser, registry, Dialog) => {
-        const url = "https://api.punkapi.com/v2/beers";
+      require(["dojo/dom", "dojo/parser", "widget/Dialog", "dojo/domReady!"], (
+        dom,
+        parser,
+        Dialog
+      ) => {
         const container = dom.byId("container");
-        const btn = dom.byId("btn");
 
         const dialog = new Dialog().placeAt(container);
 
