@@ -14,21 +14,9 @@
   <body class="claro">
     <div id="container"></div>
 
-    <div id="under" class="under-overlay">
+    <!-- <div id="under" class="under-overlay">
       <button id="btn" class="under-btn">See the beer!</button>
-    </div>
-
-    <div class="dijitHidden">
-      <div
-        data-dojo-type="dijit/Dialog"
-        style="width: 600px; background: white"
-        id="beerDialog"
-        data-dojo-props="title:'See the Beer!'"
-      >
-        <div id="beerSelect"></div>
-        <p id="value"></p>
-      </div>
-    </div>
+    </div> -->
 
     <script>
       var dojoConfig = {
@@ -51,68 +39,16 @@
     <script>
       require([
         "dojo/dom",
-        "dojo/on",
-        "dojo/dom-style",
         "dojo/parser",
-        "dijit/Dialog",
         "dijit/registry",
-        "dijit/form/Select",
-        "dojo/store/Memory",
-        "widget/Overlay",
-        "modules/fetchData.js",
+        "widget/Dialog",
         "dojo/domReady!",
-      ], (
-        dom,
-        on,
-        domStyle,
-        parser,
-        dialog,
-        registry,
-        Select,
-        Memory,
-        Overlay,
-        fetchData
-      ) => {
+      ], (dom, parser, registry, Dialog) => {
         const url = "https://api.punkapi.com/v2/beers";
         const container = dom.byId("container");
         const btn = dom.byId("btn");
 
-        showDialog = function () {
-          registry.byId("beerDialog").show();
-        };
-
-        const getBeersAndPopup = () => {
-          const overlay = new Overlay().placeAt(container);
-
-          fetchData.getBeers(url).then((data) => {
-            const beerStore = new Memory({
-              idProperty: "tagline",
-              data,
-            });
-            console.log(data);
-
-            const select = new Select(
-              {
-                name: "beerSelect",
-                store: beerStore,
-                style: "width: 200px;",
-                labelAttr: "name",
-                maxHeight: -1,
-                onChange: function (value) {
-                  document.getElementById("value").innerHTML = value;
-                },
-              },
-              "beerSelect"
-            );
-
-            select.startup();
-          });
-
-          overlay.endLoading();
-          showDialog();
-        };
-
-        on(btn, "click", getBeersAndPopup);
+        const dialog = new Dialog().placeAt(container);
 
         parser.parse();
       });

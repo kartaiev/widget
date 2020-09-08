@@ -1,25 +1,12 @@
 define([
   "dojo/_base/declare",
   "dojo/_base/fx",
-  "dojo/_base/lang",
-  "dojo/on",
   "dojo/dom-style",
   "dijit/_WidgetBase",
-  "dijit/_OnDijitClickMixin",
   "dijit/_TemplatedMixin",
   "dojo/text!./templates/overlayTemplate.html",
-], (
-  declare,
-  fx,
-  lang,
-  on,
-  domSlyle,
-  _WidgetBase,
-  _OnDijitClickMixin,
-  _TemplatedMixin,
-  template
-) => {
-  return declare([_WidgetBase, _OnDijitClickMixin, _TemplatedMixin], {
+], (declare, fx, domSlyle, _WidgetBase, _TemplatedMixin, template) => {
+  return declare([_WidgetBase, _TemplatedMixin], {
     templateString: template,
 
     baseClass: "page-overlay",
