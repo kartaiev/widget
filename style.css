@@ -6,6 +6,13 @@ body {
   padding: 0;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .page-overlay {
   top: 0;
   left: 0;
@@ -47,14 +54,3 @@ body {
   width: 600px;
   background: white;
 }
-
-/* .dijitDialogTitleBar {
-  background: rgb(76, 99, 126);
-  padding: 10px;
-} */
-
-/* .dijitDialogPaneContent {
-  background: rgb(230, 230, 231);
-  border: 1px solid teal;
-  height: 30vh;
-} */

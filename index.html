@@ -12,35 +12,43 @@
   </head>
 
   <body class="claro">
-    <div id="container"></div>
+    <div id="container">
+      <div data-dojo-type="dijit/BeerSelect"></div>
+    </div>
 
     <script>
       var dojoConfig = {
         async: true,
         dojoBlankHtmlUrl:
-          location.pathname.replace(/\/[^/]+$/, "") + "/blank.html",
+          location.pathname.replace(/\/[^/]+$/, '') + '/blank.html',
         packages: [
           {
-            name: "widget",
-            location: location.pathname.replace(/\/[^/]+$/, "") + "/widget",
+            name: 'widget',
+            location: location.pathname.replace(/\/[^/]+$/, '') + '/widget',
           },
           {
-            name: "modules",
-            location: location.pathname.replace(/\/[^/]+$/, "") + "/modules",
+            name: 'modules',
+            location: location.pathname.replace(/\/[^/]+$/, '') + '/modules',
           },
         ],
       };
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
-      require(["dojo/dom", "dojo/parser", "widget/Dialog", "dojo/domReady!"], (
-        dom,
-        parser,
-        Dialog
-      ) => {
-        const container = dom.byId("container");
+      require([
+        'dojo/dom',
+        'dojo/on',
+        'dojo/parser',
+        'widget/Dialog',
+        'widget/BeerSelect',
+        'dojo/domReady!',
+      ], (dom, on, parser, Dialog, BeerSelect) => {
+        const container = dom.byId('container');
 
-        Dialog().placeAt(container);
+        // const beerSelect = new BeerSelect({
+        //   title: 'See the beer!',
+        //   style: 'width: 400px',
+        // });
 
         parser.parse();
       });
