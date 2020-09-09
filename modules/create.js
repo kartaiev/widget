@@ -8,7 +8,6 @@ define([
   return {
     createSelect: (url, name) =>
       fetchData.getBeers(url).then((data) => {
-        console.log(data);
         const beerStore = new Memory({
           idProperty: 'tagline',
           data,
@@ -31,12 +30,12 @@ define([
         select.startup();
       }),
     createNode: (nodeName, nodeAttr, attrName, nodeVal, domToPlaceIn) => {
-      const x = domConstruct.create(nodeName);
-      domAttr.set(x, nodeAttr, attrName);
-      domAttr.set(x, 'innerHTML', nodeVal);
-      domConstruct.place(x, domToPlaceIn);
+      const n = domConstruct.create(nodeName);
+      domAttr.set(n, nodeAttr, attrName);
+      domAttr.set(n, 'innerHTML', nodeVal);
+      domConstruct.place(n, domToPlaceIn);
 
-      return x;
+      return n;
     },
   };
 });

@@ -13,8 +13,9 @@ define([
 
     selectName: 'beerSelect',
 
-    getBeersAndPopup: function () {
+    _getBeersAndPopup: function () {
       const { url, selectName, containerNode: dialogNode } = this;
+      console.log(dialogNode);
 
       const overlay = new Overlay().placeAt(container);
 
@@ -29,6 +30,8 @@ define([
       const { selectName, containerNode: dialogNode, own } = this;
       const { createNode } = create;
 
+      console.log(dialogNode);
+
       const btn = createNode(
         'button',
         'class',
@@ -41,7 +44,7 @@ define([
 
       createNode('p', 'id', 'value', '', dialogNode);
 
-      own(on(btn, 'click', lang.hitch(this, 'getBeersAndPopup')));
+      own(on(btn, 'click', lang.hitch(this, '_getBeersAndPopup')));
     },
   });
 });

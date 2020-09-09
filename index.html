@@ -13,7 +13,7 @@
 
   <body class="claro">
     <div id="container">
-      <div data-dojo-type="dijit/BeerSelect"></div>
+      <!-- <div data-dojo-type="dijit/BeerSelect"></div> -->
     </div>
 
     <script>
@@ -39,16 +39,15 @@
         'dojo/dom',
         'dojo/on',
         'dojo/parser',
-        'widget/Dialog',
         'widget/BeerSelect',
         'dojo/domReady!',
-      ], (dom, on, parser, Dialog, BeerSelect) => {
+      ], (dom, on, parser, BeerSelect) => {
         const container = dom.byId('container');
 
-        // const beerSelect = new BeerSelect({
-        //   title: 'See the beer!',
-        //   style: 'width: 400px',
-        // });
+        const beerSelect = new BeerSelect({
+          title: 'See the beer!',
+          style: 'background: white',
+        }).placeAt(container);
 
         parser.parse();
       });
