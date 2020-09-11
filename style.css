@@ -50,7 +50,7 @@ body {
   cursor: pointer;
 }
 
-.under-dialog {
+.dialog {
   width: 600px;
   background: white;
 }
