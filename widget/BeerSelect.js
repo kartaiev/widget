@@ -29,7 +29,6 @@ define([
     url: 'https://api.punkapi.com/v2/beers',
 
     onShow: function () {
-      console.log(this.selectNode.id);
       create.createSelect(this.url, this.selectNode.id);
     },
   });
