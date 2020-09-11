@@ -24,7 +24,7 @@ define([
   return declare('BeerSelect', [Dialog], {
     baseClass: 'dialog',
 
-    title: 'See the beer',
+    title: 'See the beer!',
 
     content: '<div id="beerSelect"></div><p id="value"></p>',
 
