@@ -22,11 +22,13 @@ define([
   template
 ) => {
   return declare('BeerSelect', [Dialog], {
+    templateString: template,
+
     baseClass: 'dialog',
 
     title: 'See the beer!',
 
-    content: '<div id="beerSelect"></div><p id="value"></p>',
+    content: 'Hello',
 
     draggable: true,
 
@@ -34,6 +36,10 @@ define([
 
     onShow: function () {
       create.createSelect(this.url);
+    },
+
+    postCreate: function () {
+      this.dialogNode.innerHTML = this.title;
     },
   });
 });
