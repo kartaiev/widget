@@ -21,25 +21,16 @@ define([
   Overlay,
   template
 ) => {
-  return declare('BeerSelect', [Dialog], {
+  return declare('BeerSelect', [Dialog, _WidgetsInTemplateMixin], {
     templateString: template,
 
     baseClass: 'dialog',
 
-    title: 'See the beer!',
-
-    content: 'Hello',
-
-    draggable: true,
-
     url: 'https://api.punkapi.com/v2/beers',
 
     onShow: function () {
-      create.createSelect(this.url);
-    },
-
-    postCreate: function () {
-      this.dialogNode.innerHTML = this.title;
+      console.log(this.selectNode.id);
+      create.createSelect(this.url, this.selectNode.id);
     },
   });
 });

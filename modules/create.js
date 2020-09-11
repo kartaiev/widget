@@ -15,7 +15,7 @@ define([
 
         const select = new Select(
           {
-            name: 'beerSelect',
+            name: name,
             store: beerStore,
             style: 'width: 200px;',
             labelAttr: 'name',
@@ -24,7 +24,7 @@ define([
               document.getElementById('value').innerHTML = value;
             },
           },
-          'beerSelect'
+          name
         );
 
         select.startup();
