@@ -37,11 +37,14 @@ define([
 
       fetchData.getBeers(this.url).then((data) => {
         this.selectNode.addOption({ label: '', value: '', selected: true });
+
         !this.data &&
           data.map((beer) =>
             this.selectNode.addOption({ label: beer.name, value: beer.tagline })
           );
+
         this.data = data;
+
         overlay.endLoading();
       });
 
