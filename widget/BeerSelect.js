@@ -21,7 +21,7 @@ define([
   Overlay,
   template
 ) => {
-  return declare('BeerSelect', [Dialog, _WidgetsInTemplateMixin], {
+  return declare('BeerSelect', [Dialog], {
     templateString: template,
 
     baseClass: 'dialog',
@@ -29,7 +29,9 @@ define([
     url: 'https://api.punkapi.com/v2/beers',
 
     onShow: function () {
-      create.createSelect(this.url, this.selectNode.id);
+      fetchData.getBeers(this.url).then((data) => {
+        this.selectNode.addOption(data);
+      });
     },
   });
 });
