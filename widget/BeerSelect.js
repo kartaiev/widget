@@ -35,15 +35,15 @@ define([
     onShow: function () {
       const overlay = new Overlay().placeAt(container);
 
-      fetchData.getBeers(this.url).then((data) => {
+      fetchData.getBeers(this.url).then((beers) => {
         this.selectNode.addOption({ label: '', value: '', selected: true });
 
         !this.data &&
-          data.map((beer) =>
+          beers.map((beer) =>
             this.selectNode.addOption({ label: beer.name, value: beer.tagline })
           );
 
-        this.data = data;
+        this.data = beers;
 
         overlay.endLoading();
       });
