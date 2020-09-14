@@ -32,14 +32,15 @@ define([
 
     onShow: function () {
       const overlay = new Overlay().placeAt(container);
+
       fetchData.getBeers(this.url).then((data) => {
         this.selectNode.addOption({ label: '', value: '', selected: true });
-        data.map((beer) =>
-          this.selectNode.addOption({ label: beer.name, value: beer.tagline })
-        );
+        this.selectNode.options.length < 2 &&
+          data.map((beer) =>
+            this.selectNode.addOption({ label: beer.name, value: beer.tagline })
+          );
+        overlay.endLoading();
       });
-
-      overlay.endLoading();
 
       this.selectNode.on('change', () => {
         dom.byId('value').innerHTML = this.selectNode.value;
