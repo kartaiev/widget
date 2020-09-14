@@ -54,3 +54,7 @@ body {
   width: 600px;
   background: white;
 }
+
+#select {
+  max-height: -1;
+}
