@@ -1,28 +1,24 @@
 define([
   'dojo/_base/declare',
+  'dojo/dom',
   'dojo/on',
   'dijit/_WidgetBase',
   'dijit/_TemplatedMixin',
   'dijit/_WidgetsInTemplateMixin',
   'dijit/form/Select',
-  'dojo/store/Memory',
-  'dojo/data/ObjectStore',
   'dijit/Dialog',
-  'modules/create',
   'modules/fetchData',
   'widget/Overlay',
   'dojo/text!./templates/beerSelectTemplate.html',
 ], (
   declare,
+  dom,
   on,
   _WidgetBase,
   _TemplatedMixin,
   _WidgetsInTemplateMixin,
-  Memory,
-  ObjectStore,
   Select,
   Dialog,
-  create,
   fetchData,
   Overlay,
   template
@@ -43,7 +39,7 @@ define([
       });
 
       this.selectNode.on('change', () => {
-        document.getElementById('value').innerHTML = this.selectNode.value;
+        dom.byId('value').innerHTML = this.selectNode.value;
       });
     },
   });
