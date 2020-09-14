@@ -31,12 +31,15 @@ define([
     url: 'https://api.punkapi.com/v2/beers',
 
     onShow: function () {
+      const overlay = new Overlay().placeAt(container);
       fetchData.getBeers(this.url).then((data) => {
         this.selectNode.addOption({ label: '', value: '', selected: true });
         data.map((beer) =>
           this.selectNode.addOption({ label: beer.name, value: beer.tagline })
         );
       });
+
+      overlay.endLoading();
 
       this.selectNode.on('change', () => {
         dom.byId('value').innerHTML = this.selectNode.value;
