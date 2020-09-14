@@ -30,15 +30,18 @@ define([
 
     url: 'https://api.punkapi.com/v2/beers',
 
+    data: null,
+
     onShow: function () {
       const overlay = new Overlay().placeAt(container);
 
       fetchData.getBeers(this.url).then((data) => {
         this.selectNode.addOption({ label: '', value: '', selected: true });
-        this.selectNode.options.length < 2 &&
+        !this.data &&
           data.map((beer) =>
             this.selectNode.addOption({ label: beer.name, value: beer.tagline })
           );
+        this.data = data;
         overlay.endLoading();
       });
 
