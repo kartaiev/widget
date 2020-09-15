@@ -36,8 +36,6 @@ define([
 
     data: null,
 
-    tagline: '',
-
     send: function (value) {
       this.emit('beer', { value });
     },
@@ -57,7 +55,6 @@ define([
       });
 
       this.btnNode.on('click', () => {
-        this.tagline = this.selectNode.value;
         this.send({ value: this.selectNode.value });
       });
     },
