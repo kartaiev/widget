@@ -46,8 +46,6 @@ define([
       const overlay = new Overlay().placeAt(container);
 
       fetchData.getBeers(this.url).then((beers) => {
-        this.selectNode.addOption({ label: '', value: '', selected: true });
-
         !this.data &&
           beers.map((beer) =>
             this.selectNode.addOption({ label: beer.name, value: beer.tagline })
