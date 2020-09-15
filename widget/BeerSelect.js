@@ -56,10 +56,6 @@ define([
         overlay.endLoading();
       });
 
-      // this.selectNode.on('change', () => {
-      //   dom.byId('value').innerHTML = this.selectNode.value;
-      // });
-
       this.btnNode.on('click', () => {
         this.tagline = this.selectNode.value;
         this.send({ value: this.selectNode.value });
