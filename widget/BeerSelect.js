@@ -38,8 +38,8 @@ define([
 
     tagline: '',
 
-    send: function (el) {
-      this.emit(el, {});
+    send: function (value) {
+      this.emit('beer', { value });
     },
 
     onShow: function () {
@@ -62,7 +62,7 @@ define([
 
       this.btnNode.on('click', () => {
         this.tagline = this.selectNode.value;
-        this.send('emit');
+        this.send({ value: this.selectNode.value });
       });
     },
   });

@@ -14,6 +14,7 @@
   <body class="claro">
     <div id="container">
       <button id="btn">See th Beer</button>
+      <p id="val" dojo-data-attach-point="valueNode"></p>
     </div>
 
     <script>
@@ -47,6 +48,7 @@
       ], (dom, query, domConstruct, on, parser, Select, BeerSelect) => {
         const container = dom.byId('container');
         const btn = dom.byId('btn');
+        const p = dom.byId('val');
 
         const beerSelect = new BeerSelect().placeAt(container);
 
@@ -54,11 +56,8 @@
           beerSelect.show();
         };
 
-        beerSelect.on('emit', function () {
-          domConstruct.destroy(query('p')[0]);
-          const p = domConstruct.create('p');
-          p.innerHTML = beerSelect.tagline;
-          domConstruct.place(p, container);
+        beerSelect.on('beer', function ({ value }) {
+          p.innerHTML = value.value;
 
           beerSelect.hide();
         });
