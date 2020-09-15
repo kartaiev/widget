@@ -37,12 +37,14 @@
     <script>
       require([
         'dojo/dom',
+        'dojo/query',
+        'dojo/dom-construct',
         'dojo/on',
         'dojo/parser',
         'dijit/form/Select',
         'widget/BeerSelect',
         'dojo/domReady!',
-      ], (dom, on, parser, Select, BeerSelect) => {
+      ], (dom, query, domConstruct, on, parser, Select, BeerSelect) => {
         const container = dom.byId('container');
         const btn = dom.byId('btn');
 
@@ -51,6 +53,15 @@
         showDialog = function () {
           beerSelect.show();
         };
+
+        beerSelect.on('emit', function () {
+          domConstruct.destroy(query('p')[0]);
+          const p = domConstruct.create('p');
+          p.innerHTML = beerSelect.tagline;
+          domConstruct.place(p, container);
+
+          beerSelect.hide();
+        });
 
         on(btn, 'click', showDialog);
 
