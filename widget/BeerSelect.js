@@ -28,8 +28,6 @@ define([
   return declare('BeerSelect', [Evented, Dialog, _WidgetsInTemplateMixin], {
     templateString: template,
 
-    baseClass: 'dialog',
-
     url: 'https://api.punkapi.com/v2/beers',
 
     data: null,
@@ -38,18 +36,20 @@ define([
       this.emit('beer', { value });
     },
 
+    overlay: new Overlay(),
+
     onShow: function () {
-      const overlay = new Overlay().placeAt(container);
+      this.overlay.placeAt(container);
 
       fetchData.getBeers(this.url).then((beers) => {
         !this.data &&
-          beers.map((beer) =>
-            this.selectNode.addOption({ label: beer.name, value: beer.tagline })
+          beers.map(({ name, tagline }) =>
+            this.selectNode.addOption({ label: name, value: tagline })
           );
 
         this.data = beers;
 
-        overlay.endLoading();
+        this.overlay.endLoading();
       });
 
       this.btnNode.on('click', () => {
