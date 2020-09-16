@@ -50,18 +50,19 @@ define([
       });
     },
 
-    onOkClick: function (value) {
-      this.emit('beer', { value });
+    onOkClick: function () {
+      this.emit('beer', { value: this.selectNode });
       this.hide();
     },
 
     onShow: function () {
+      const onOkClick = this.onOkClick.bind(this);
+
       this.overlay.placeAt(container);
+
       !this.data && this.getDataAddOptions();
 
-      this.btnNode.on('click', () => {
-        this.onOkClick({ value: this.selectNode.value });
-      });
+      this.btnNode.on('click', onOkClick);
     },
   });
 });

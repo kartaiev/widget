@@ -35,7 +35,6 @@ define([
     postCreate: function () {
       const showDialog = this.showDialog.bind(this);
       const getVal = this.getVal.bind(this);
-
       this.own(
         on(this.btnNode, 'click', showDialog),
         on(this.beerSelect, 'beer', getVal)
