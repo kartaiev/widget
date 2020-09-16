@@ -28,22 +28,17 @@ define([
       this.beerSelect.show();
     },
 
-    closeDialog: function () {
-      this.beerSelect.hide();
+    getVal: function ({ value }) {
+      this.valueNode.innerHTML = value.value;
     },
 
     postCreate: function () {
-      const valueNode = this.valueNode;
+      const showDialog = this.showDialog.bind(this);
+      const getVal = this.getVal.bind(this);
+
       this.own(
-        on(this.btnNode, 'click', lang.hitch(this, 'showDialog')),
-        on(
-          this.beerSelect,
-          'beer',
-          lang.hitch(this, ({ value }) => {
-            valueNode.innerHTML = value.value;
-            this.closeDialog();
-          })
-        )
+        on(this.btnNode, 'click', showDialog),
+        on(this.beerSelect, 'beer', getVal)
       );
     },
   });
