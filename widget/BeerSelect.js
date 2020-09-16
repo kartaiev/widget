@@ -51,18 +51,20 @@ define([
     },
 
     onOkClick: function () {
-      this.emit('beer', { value: this.selectNode });
+      this.emit('beer', { value: this.selectNode.value });
       this.hide();
     },
 
     onShow: function () {
-      const onOkClick = this.onOkClick.bind(this);
-
       this.overlay.placeAt(container);
 
       !this.data && this.getDataAddOptions();
+    },
 
-      this.btnNode.on('click', onOkClick);
+    postCreate: function () {
+      this.inherited(arguments);
+      const onOkClick = this.onOkClick.bind(this);
+      this.own(on(this.btnNode, 'click', onOkClick));
     },
   });
 });

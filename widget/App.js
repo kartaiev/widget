@@ -29,7 +29,7 @@ define([
     },
 
     getVal: function ({ value }) {
-      this.valueNode.innerHTML = value.value;
+      this.valueNode.innerHTML = value;
     },
 
     postCreate: function () {
