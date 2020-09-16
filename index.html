@@ -12,10 +12,7 @@
   </head>
 
   <body class="claro">
-    <div id="container">
-      <button id="btn">See th Beer</button>
-      <p id="val" dojo-data-attach-point="valueNode"></p>
-    </div>
+    <div id="container"></div>
 
     <script>
       var dojoConfig = {
@@ -36,33 +33,14 @@
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.8.1/dojo/dojo.js"></script>
     <script>
-      require([
-        'dojo/dom',
-        'dojo/query',
-        'dojo/dom-construct',
-        'dojo/on',
-        'dojo/parser',
-        'dijit/form/Select',
-        'widget/BeerSelect',
-        'dojo/domReady!',
-      ], (dom, query, domConstruct, on, parser, Select, BeerSelect) => {
+      require(['dojo/dom', 'dojo/parser', 'widget/App', 'dojo/domReady!'], (
+        dom,
+        parser,
+        App
+      ) => {
         const container = dom.byId('container');
-        const btn = dom.byId('btn');
-        const p = dom.byId('val');
 
-        const beerSelect = new BeerSelect().placeAt(container);
-
-        showDialog = function () {
-          beerSelect.show();
-        };
-
-        beerSelect.on('beer', function ({ value }) {
-          p.innerHTML = value.value;
-
-          beerSelect.hide();
-        });
-
-        on(btn, 'click', showDialog);
+        new App().placeAt(container);
 
         parser.parse();
       });

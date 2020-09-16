@@ -1,19 +1,19 @@
 define([
-  "dojo/_base/declare",
-  "dojo/_base/fx",
-  "dojo/dom-style",
-  "dijit/_WidgetBase",
-  "dijit/_TemplatedMixin",
-  "dojo/text!./templates/overlayTemplate.html",
+  'dojo/_base/declare',
+  'dojo/_base/fx',
+  'dojo/dom-style',
+  'dijit/_WidgetBase',
+  'dijit/_TemplatedMixin',
+  'dojo/text!./templates/overlay.template.html',
 ], (declare, fx, domSlyle, _WidgetBase, _TemplatedMixin, template) => {
   return declare([_WidgetBase, _TemplatedMixin], {
     templateString: template,
 
-    baseClass: "page-overlay",
+    baseClass: 'page-overlay',
 
-    title: "Loading...",
+    title: 'Loading...',
 
-    loader: require.toUrl("../loading.gif"),
+    loader: require.toUrl('../loading.gif'),
 
     postCreate: function () {
       this.titleNode.innerHTML = this.title;
@@ -24,7 +24,7 @@ define([
       fx.fadeOut({
         node: this.domNode,
         onEnd: function (node) {
-          domSlyle.set(node, "display", "none");
+          domSlyle.set(node, 'display', 'none');
         },
       }).play();
     },

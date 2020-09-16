@@ -1,7 +1,6 @@
 define([
   'dojo/_base/declare',
   'dojo/Evented',
-  'dojo/dom',
   'dojo/on',
   'dijit/form/Button',
   'dijit/_WidgetBase',
@@ -11,11 +10,10 @@ define([
   'dijit/Dialog',
   'modules/fetchData',
   'widget/Overlay',
-  'dojo/text!./templates/beerSelectTemplate.html',
+  'dojo/text!./templates/beerSelect.template.html',
 ], (
   declare,
   Evented,
-  dom,
   on,
   Button,
   _WidgetBase,
