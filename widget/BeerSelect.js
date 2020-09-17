@@ -57,7 +57,6 @@ define([
 
     onShow: function () {
       this.overlay.placeAt(container);
-
       !this.data && this.getDataAddOptions();
     },
 
