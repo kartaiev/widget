@@ -62,8 +62,7 @@ define([
 
     postCreate: function () {
       this.inherited(arguments);
-      const onOkClick = this.onOkClick.bind(this);
-      this.own(on(this.btnNode, 'click', onOkClick));
+      this.own(on(this.btnNode, 'click', this.onOkClick.bind(this)));
     },
   });
 });
